@@ -103,18 +103,18 @@ gbreset() {
 }
 
 gco() {
-  listBranches "checkout"
+  _listBranches "checkout"
 }
 
 gbd() {
-  listBranches "deletion"
+  _listBranches "deletion"
 }
 
 gcor() {
-  listBranches "remote checkout"
+  _listBranches "remote checkout"
 }
 
-listBranches() {
+_listBranches() {
   branchesFile=$TMPDIR'branches'
   trap "{ rm -f $branchesFile; }" EXIT
 
@@ -148,7 +148,6 @@ listBranches() {
 
   case $1 in
   "remote checkout")
-    echo "origin/$branch"
     git checkout -t $branch
     ;;
   "checkout")
