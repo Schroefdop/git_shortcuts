@@ -126,7 +126,8 @@ _listBranches() {
   n=1
   while read line; do
     if [[ $line == *"*"* ]]; then
-      echo "Current branch:\n${GREEN}$line${NOCOLOR}"
+      currentBranch=$(git branch | grep \* | cut -d ' ' -f2)
+      echo "Current branch:\n${GREEN}$currentBranch${NOCOLOR}"
       # Remove the current branch from the file, we cannot checkout current branch
       sed -i "" $n\d $branchesFile
     fi
