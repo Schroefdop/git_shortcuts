@@ -119,8 +119,8 @@ _listBranches() {
   trap "{ rm -f $branchesFile; }" EXIT
 
   case $1 in
-  "remote checkout") git branch --all >$branchesFile ;;
-  *) git branch >$branchesFile ;;
+  "remote checkout") git branch -r >$branchesFile ;; # Get remote branches
+  *) git branch >$branchesFile ;;                    # Get local branches
   esac
 
   n=1
