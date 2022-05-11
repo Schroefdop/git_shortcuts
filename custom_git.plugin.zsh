@@ -8,12 +8,10 @@ alias gau='git add --update'
 alias gb='git branch'
 alias gbr='git branch -r' # Remote branches
 alias gba='git branch -a' # All branches
-# alias gbd='git branch -D' # Delete branch (gbd <branch name>)
 alias gc='git commit'
 alias gcm='git commit --message'
 alias gcf='git commit --fixup'
 alias gca='git commit --am'
-# alias gco='git checkout'
 alias gcof='git checkout HEAD -- ' #gcof <filename> to reset file
 alias gcob='git checkout -b'
 alias gcom='git checkout master'
@@ -26,7 +24,6 @@ alias gf='git fetch'
 alias glo='git log --oneline'
 alias glg='git log --graph --oneline --decorate --all'
 alias glp='git log --pretty=format:"%Cred%h%Creset|%Cgreen%ad%Creset|%Cgreen%cr%Creset|%C(bold blue)<%an>%Creset""%C(yellow)%d%Creset %s" --abbrev-commit --date=short' # Print git log data on two line
-alias gm='git merge --no-ff'
 alias gmd='git merge --no-ff develop'
 alias gma='git merge --abort'
 alias gmc='git merge --continue'
@@ -46,7 +43,7 @@ alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gsts='git stash save'
 alias gitconfig='git config --global --edit'
-alias checkoutRemoteBranch="git checkout -t <name of remote>/test"
+alias git.fix='git diff --name-only | uniq | xargs code'
 
 # Git log find by commit message
 glf() {
@@ -103,8 +100,9 @@ grp() {
 # Reset current branch to equal named origin branch
 gbreset() {
   currentBranch=$(git branch | grep \* | cut -d ' ' -f2)
-  read -l -p "Reset current branch <$currentBranch> to <origin/$currentBranch>? [y/n] " confirm
-
+  printf "Reset current branch <$currentBranch> to <origin/$currentBranch>? [y/n] "
+  read confirm
+  
   case "$confirm" in
   [yY])
     git reset --hard origin/$currentBranch
